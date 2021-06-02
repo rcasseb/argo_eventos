@@ -1,3 +1,7 @@
+import 'dart:html';
+
+import 'package:componente_e_navegacao/detalhes.dart';
+import 'package:componente_e_navegacao/novo_evento.dart';
 import 'package:flutter/material.dart';
 
 import 'lista.dart';
@@ -19,6 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (context) => Login(),
         'lista': (context) => Lista(),
+        'novo': (context) => NovoEvento(),
+        'detalhes': (context) => Detalhes(),
       },
     );
   }
