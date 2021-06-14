@@ -1,11 +1,11 @@
 import 'dart:html';
 
-import 'package:componente_e_navegacao/detalhes.dart';
-import 'package:componente_e_navegacao/novo_evento.dart';
+import 'package:componente_e_navegacao/view/evento_show.dart';
+import 'package:componente_e_navegacao/view/evento_form.dart';
 import 'package:flutter/material.dart';
 
-import 'lista.dart';
-import 'login.dart';
+import 'view/evento_list.dart';
+import 'view/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes: {
         'login': (context) => Login(),
-        'lista': (context) => Lista(),
-        'novo': (context) => NovoEvento(),
-        'detalhes': (context) => Detalhes(),
+        'list': (context) => EventoList(),
+        'form': (context) => EventoForm(),
+        'show': (context) => EventoShow(),
       },
     );
   }
