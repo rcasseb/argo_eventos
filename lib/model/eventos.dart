@@ -1,16 +1,47 @@
+import 'dart:convert';
+
 import 'package:componente_e_navegacao/model/evento.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as httpApi;
 
-class Eventos {}
+class Eventos with ChangeNotifier {
+  static const url = "https://argo-dfc03-default-rtdb.firebaseio.com/";
+  final List<Evento> lista = [];
 
-const EVENTOS = {
-  '11': Evento(
-    id: '11',
-    titulo: "Computacao Amostra",
-    descricao: "Feira de tecnologia",
+  List<Evento> getEventos() {
+    return lista;
+  }
+
+  int getTotal() {
+    return lista.length;
+  }
+
+  void addEvento(String titulo, String descricao) {
+    Evento novo = Evento('3', titulo, descricao);
+
+    EVENTOS.putIfAbsent('4', () => novo);
+    notifyListeners();
+
+    httpApi.post(
+      Uri.parse('$url/eventos.json'),
+      body: jsonEncode({
+        'id': novo.id,
+        'titulo': novo.titulo,
+        'descricao': novo.descricao,
+      }),
+    );
+  }
+}
+
+final EVENTOS = {
+  '1': Evento(
+    '1',
+    "Computacao Amostra",
+    "Feira de tecnologia",
   ),
-  '22': Evento(
-    id: '22',
-    titulo: "Projeto Integrado",
-    descricao: "Escola de tecnologia aplicada",
+  '2': Evento(
+    '2',
+    "Projeto Integrado",
+    "Escola de tecnologia aplicada",
   ),
 };

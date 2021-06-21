@@ -5,9 +5,5 @@ class Evento {
   final String titulo;
   final String descricao;
 
-  const Evento({
-    this.id,
-    @required this.titulo,
-    @required this.descricao,
-  });
+  Evento(this.id, this.titulo, this.descricao);
 }

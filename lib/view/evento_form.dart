@@ -1,6 +1,28 @@
+import 'package:componente_e_navegacao/model/eventos.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class EventoForm extends StatelessWidget {
+class EventoForm extends StatefulWidget {
+  @override
+  _EventoFormState createState() => _EventoFormState();
+}
+
+class _EventoFormState extends State<EventoForm> {
+  String titulo = '';
+  String descricao = '';
+
+  _atualizarTitulo(String valor) {
+    setState(() {
+      titulo = valor;
+    });
+  }
+
+  _atualizarDescricao(String valor) {
+    setState(() {
+      descricao = valor;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +65,15 @@ class EventoForm extends StatelessWidget {
   }
 
   Widget _form() {
+    final Eventos eventos = Provider.of(context);
+
     return Center(
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
+              onChanged: (value) => _atualizarTitulo(value),
               decoration: InputDecoration(
                   labelText: 'Título do evento', border: OutlineInputBorder()),
             ),
@@ -56,22 +81,15 @@ class EventoForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
+              onChanged: (value) => _atualizarDescricao(value),
               decoration: InputDecoration(
-                  labelText: 'Assunto', border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                labelText: 'Data do evento',
-                border: OutlineInputBorder(),
-              ),
+                  labelText: 'Descrição', border: OutlineInputBorder()),
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              eventos.addEvento(titulo, descricao);
+            },
             child: Text("Cadastrar Evento"),
           )
         ],

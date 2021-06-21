@@ -1,6 +1,7 @@
 import 'package:componente_e_navegacao/component/evento_tile.dart';
 import 'package:componente_e_navegacao/model/eventos.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EventoList extends StatefulWidget {
   @override
@@ -52,10 +53,12 @@ class _ListaState extends State<EventoList> {
   }
 
   Widget _lista() {
-    const eventos = {...EVENTOS};
+    final Eventos eventos = Provider.of(context);
 
     return ListView.builder(
-        itemCount: eventos.length,
-        itemBuilder: (ctx, i) => EventoTile(eventos.values.elementAt(i)));
+        itemCount: eventos.getTotal(),
+        itemBuilder: (ctx, i) => EventoTile(
+              eventos.getEventos().elementAt(i),
+            ));
   }
 }
